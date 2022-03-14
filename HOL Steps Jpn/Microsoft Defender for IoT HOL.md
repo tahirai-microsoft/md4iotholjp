@@ -264,9 +264,9 @@ During this task we will configure Azure Defender based on the IPs highlighted b
 
    ![Defender IP](./images/E2T2-AzureDefenderForIoTSensor.png 'Defender IP Address')
 
-   > **Note:** "md4iotsensoroffline" 仮想マシンのキーボードは標準で US になっていますので、作業PCのレイアウトと一致しない可能性があります  
-   > Windows 10 のオンスクリーンキーボード でパスワード入力時のトラブルを回避可能です  
-   > タスクバーの検索ボックスで **osk** と入力すると表示される "On-Screen Keyboard" を実行し、
+   > **Note:** "md4iotsensoroffline" 仮想マシンのKBレイアウトは標準で US のため、作業PCの入力と一致しない可能性があります  
+   > その場合は Windows 10 のオンスクリーンキーボード でパスワード入力時のトラブルを回避可能です  
+   > タスクバーの検索ボックスで **on** と入力すると表示される "On-Screen Keyboard" を実行します
 
    ![Start-OSK](./images/E2T2-Start-OSK.png 'Start on-screen keybaord')
 
@@ -274,7 +274,7 @@ During this task we will configure Azure Defender based on the IPs highlighted b
 
    ![OSK-Keyboard-Logon](./images/E2T2-keyboard.png)
 
-1. ログイン後、製品のアクティベーションが求められますので **Upload** をクリック、**Browse Files** をクリック、ダウンロードフォルダを選択してライセンスファイルを指定します (例:myofflinesensor_activation_10.X.zip)
+1. ブラウザーでセンサーにログイン後、製品のアクティベーションが求められますので **Upload** をクリック、**Browse Files** をクリック、ダウンロードフォルダを選択してライセンスファイルを指定します (例: myofflinesensor_activation_10.X.zip)
 
    ![Defender Login](./images/E2T2-offline-sensor-activation.png 'Defender Login Screen')
 
@@ -286,136 +286,136 @@ During this task we will configure Azure Defender based on the IPs highlighted b
 
 1. 続いて **SSL/TLS Certificates | Onboarding 2/2** の設定は **Disable** で **Finish** をクリックします
 
+   ![Certificate selection](./images/E2T2-offline-sensor-certificate-2.png 'Defender certificate selection')
+
 事前に取得した情報を用いて分析してみましょう  
 
 ## 演習 #3: システム設定を有効にする
 
 ### 作業1: システム プロパティ
 
-1. In your offline sensor you will find **System Settings** on the left side of the Azure Defender portal, click there as shown below.
+1. センサー画面の左メニューにある **System Settings** をクリックします
 
    ![Select System Settings](./images/E3T1-System-Settings.png 'Defender for IoT Select System Settings')
 
-1. Next, look for the icon **System Properties** on the right side. Click on the icon. You you will see a pop up warning, click **Ok**.
+1. 右側に **System Properties** のアイコンが表示されますのでクリック、警告ポップアップが表示されますので **Ok** をクリックします
 
-1. In the new window on the left side, scroll down until you see **Pcaps**, click there. Now on the right side scroll all the way down and we will modify three parameters as shown below:
+1. 左側のメニューを **Pcaps** が表示されるまでスクロールさせクリック、右側に表示された設定をスクロールして、以下のように3つのパラメータを変更します
 
    - **player_max_amount=200**
+   - **player.params=-M 3**
    - **enabled=1**
-   - **player.params=-M 3** <br> <br>
 
-   Amongst others, these settings enable the PCAP player and allow it to playback faster than real-time.
+   これらは PCAP Player を有効にし、リアルタイムより高速に再生できるようにするための設定です
 
    ![Set PCAPS](./images/E3T1-Enable-PCAPs.png 'Enable PCAP Settings')
 
-1. Click **Save** and then **Ok**.
+1. **Save** 、続いて **Ok** をクリックします.
 
-1. At this point you should see the Pcap Player available (you can close the **Edit System Properties** screen now by clicking the **Cancel** button):
+1. この時点で PCAP Player が有効になっていることを確認できます (**Cancel** をクリックして **Edit System Properties** スクリーンを閉じることができます)
 
    ![Pcap Player](./images/E3T1-PCAP-Player.png 'Pcap player')
 
 ### 作業2: PCAP ファイル
 
-1. In a previous step you already downloaded a  **holpcaps.zip** file from the Storage account. It should be in your Azure Virtual Machine's **Downloads** folder.
+In a previous step you already downloaded a  **holpcaps.zip** file from the Storage account. It should be in your Azure Virtual Machine's **Downloads** folder.  
 
-1. Unzip **holpcaps.zip**
+1. PCAP ファイル(holpcaps.zip) を解凍します
+1. センサー (ブラウザ) に戻り **System Settings** をクリック、**PCAP Player** の **Upload** 、**Browse Files** をクリックし、解凍されたファイルを全て選択して **Open** をクリックします (アップロードには数分かかります)  
 
-1.  Go back to Azure Defender, Click on **System Settings**, then **PCAP Player** now select **Upload**,
-**Browse Files**, browse to the folder where you download the files in the previous step, select all the files and click **Open**. This operation will take a few minutes to upload all the files.
-
-1. At this point you should see all the files uploaded.
+1. この段階でアップロードされたファイル群を確認できます  
 
    ![Pcap Files Ready](./images/E3T2-PCAP-Files-Uploaded.png 'PCAP Files Uploaded')
 
-1. Click on **Play All**, in a few minutes you will receive a message saying all the files has been played. 
+1. **Play All** をクリック、数分後全てのファイルが再生された旨のメッセージが表示されます  
 
 ## 演習 #4: データを分析する
 
-After Defender for Cloud learnt about your environment it will be able to share insights pretty fast.
+環境学習が完了すると、非常に迅速な洞察が可能になります  
 
-### 作業1: デバイスマップ
+### 作業1: デバイスマップ  
 
-Your first interaction with Devices map you will see a similar map like the one below (details of what you actually see may vary):
+初めてデバイスマップを操作す際には以下のようなマップが表示されます (内容が異なる場合もあります)  
 
-![Pcap Files Uploaded](./images/devices-map.png 'Pcap files uploaded')
+![Device Map](./images/E4T1-devices-map.png 'Device Map')
 
-1. Use the four icon bar on the left to select **Layout by Purdue**. In this model you will see the different layers between Corporate IT and site operations.
-
+1. 左の4つのアイコンの上から3つめ、**layout options** から **Layout by Purdue** をクリックします  
+   このモデルでは、企業ITとサイトオペレーションの間の様々なレイヤーを見ることができます  
    ![purdue-layout](https://user-images.githubusercontent.com/60540284/140969899-b83965cc-0900-4f45-95df-e944856d99d3.gif)
 
-1. Check your notifications available and you can take action at this point.
-
+1. 利用可能な通知を確認し、この時点でアクションを起こすことができます
    ![notifications](https://user-images.githubusercontent.com/60540284/140969923-5634ea88-6d74-4b7b-9e13-c278e0cce20f.gif)
 
-1. For each device right click to analyze properties, show events, reports and simulate attack vectors.
-
+1. 各デバイスを右クリックし、プロパティの分析、イベントの表示、レポート、攻撃ベクトルのシミュレーションを行います
    ![device-right-click](https://user-images.githubusercontent.com/60540284/140969957-1f51fa73-1e20-4930-8c8d-3271ecb68149.gif)
 
-1. In the hamburger menu on the left, click the highlights and select one of the **OT Protocols** i.e. **MODBUS** and click on **Filter**. Now your map will show those devices only
-
+1. All Devices の左の ハンバーガーメニューをクリック、**OT Protocols** (例: **MODBUS**) をクリック、そして **Filter** をクリックします  
+   マップ上のデバイスにそのプロトコルを用いるものだけが表示されます  
    ![modbus](https://user-images.githubusercontent.com/60540284/140970027-dad74aba-4d88-45cb-8505-830c62b3ecc0.gif)
 
-1. Then filter your devices by **CIP** OT Protocol, at the bottom of your map you will see a PLC, where the Vendor is Rockwell Automation, has already 3 alerts activated. Right click on the device, **View Properties**. In this view you will be able to analyze the Backbone of your PLCs, take actions and analyze the Alerts.
-
+1. 次に **CIP** OT プロトコルによってデバイスをフィルタリングします  
+   マップに Rockwell Automation の PLC が表示され、既に3つのアラートが有効になっていることが分かります  
+   デバイスを右クリックし **View Properties** をクリックします  
+   このビューで PLC のバックボーンを分析し、アクションをとり、アラートを分析できます  
    ![cip](https://user-images.githubusercontent.com/60540284/140970072-7db949da-f87c-41ef-88c0-45cea6da0f62.gif)
 
 ### 作業2: アラート
 
-1. Once you click Alerts in your PLC you will see a new window pop up showing three different types of alerts.
+1. PLCの Alerts をクリックすると新しいウィンドウが開き、3種類のアラートが表示されます  
 
-   - Operational(high Alert and lower alert)
-   - Policy Violation
+   - OPERATIONAL (High Alert - 赤 と Lower Alert - オレンジ)
+   - POLICY VIOLATION (ポリシー違反)
 
-   For each of these alerts you will be able to analyze the pcap file, export a report, analyze the timeline or mute the alert.
-
+   これらのアラートごとに、Pcap ファイルの解析、レポートのエクスポート、タイムラインの解析、アラートのミュートが可能です
    ![ex4-t2-1](https://user-images.githubusercontent.com/60540284/141076357-ef22ec24-1d94-462b-8076-a3077cbca2a7.gif)
     
-1. If we remove the device filter from the top of the screen, then click **Confirm** you will see 20 Alerts in process.
+1. デバイスフィルター (ここでは IP アドレス) を削除して **Confirm** をクリックすると、大量のアラートが表示されます
 
-1. Apply **Custom Groups** to filter different scenarios, such as **Unclassified subnets** then **Confirm**
-
+1. 異なるシナリオをフィルターするために **Advanced Filters** をクリック、**All Device Group** から **Unclassified subnets** のような **Custom Groups** をクリックし **Confirm** をクリックします
    ![ex4-t2-2-3](https://user-images.githubusercontent.com/60540284/141076872-1b8350d6-ad56-4444-995d-256ce0785c81.gif)
 
 ### 作業3: デバイス インベントリ
 
-1. In this view, filter all your devices by **Is Authorized**, True or False are possible values.
+1. 全てのデバイスを **Is Authorized** でフィルタリングします (値は True または False となります)  
 
-   > **NOTE:** if you don't see the column "Is Authorized", click on the "Device Inventory Settings" gear icon (upper-right corner) and add it to the view.
+   > **NOTE:** "Is Authorized" が表示されない場合には、右上の歯車アイコン "Device Inventory Settings" から "Is Authorized" の項目にチェックを入れてビューに追加します  
 
    ![ex4-t3-st1](https://user-images.githubusercontent.com/60540284/141078788-04910c9d-6dfe-4a03-bc93-42c26d08d778.gif)
 
-1. Organize your devices based on filters.
-
-1. Export the list to a csv files.
+1. フィルターに基づきデバイスを整理します  
+1. リストを CSV ファイルとしてエクスポートします
 
 ### 作業4: イベントタイムライン
 
-This view will allow you a Forensic analysis of your alerts.
+このビューではアラートのフォレンジック分析が可能です
 
-1. Choose **Advanced Filters**, filter the timeline by **CIP**, let's analyze the alert timeline.
-
+1. **Advanced Filters** を選択、タイムラインを **CIP** でフィルタリングして、アラートタイムラインを分析します  
    ![Event-Time-Line-by-CIP](./gifs/MD4IoT-EventTimeline.gif)
 
 ### 作業5: データ マイニング
 
-In this section you can create multiple custom reports.
-As an example we will create a Report based on firmware updates versions.
+このセクションでは複数のカスタムレポートを作成することができます  
+例として、ファームウェアの更新バージョンに基づくレポートを作成します  
 
-1. Go To **+**, **New report**, in the categories section select **Modules and Firmware update versions**
+1. **+** から, **New Report** をクリック、表示されたカテゴリから **Modules and Firmware Versions** を選択します  
 
-1. Assign a name to your report. Then go to Filters, **add** and select **Firmware version(generic)**
+1. **Name:** と **Description:** を入力し、**Filters:** の **add** から **Firmware version(GENERIC)** を選択します 
 
    ![Create-New-Report](./images/E4T5-Create-New-Report.png 'Create PLC Firmware Version Report')
 
-1. In the new field added **Firmware Version(GENERIC)** add **0.4.1**, then **Save**.
+1. 追加された **Firmware Version(GENERIC)** フィールドに **0.4.1** を入力し、**Save** をクリックします
 
-1. You can remove the filter to list all the firmware updates version in your list also.
 
-1. Export you report(pdf, csv) for further actions. 
+1. フィルタを削除して全てのファームウェアバージョンをリストアップすることもできます
+
+   ![View-Report](./images/E4T5-View-Report.png 'View PLC Firmware Version Report')
+
+1. レポート (PDF/CSV) をエクスポートして、今後の作業に役立てることができます  
 
 ### 作業6: リスク アセスメント
 
-1. Go to the Risk assessment, run the assessment. During this task we will show you how to analyze the assessment. 
+1. **Risk Assessment** に移動し、**Generate Report** をクリックします  
+タスク実行中、どのようにしてアセスメントを分析するかをご紹介します  
 
 ## 演習 #5: オンラインセンサーを設定する
 
