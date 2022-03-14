@@ -23,7 +23,7 @@
    - [作業 2: IoT Hub を作成する](#Task-2-Create-an-IoT-Hub)
    - [作業 3: センサーをオンボード（有効化）する](#Task-3-Onboarding-sensors)
 - [演習 #2: オフラインセンサーを設定する](#Exercise-2-Setting-up-your-offline-sensor)
-   - [作業1: オフラインセンサー（nested VM）を設定する](#Task-1-Set-up-your-nested-Virtual-Machine)
+   - [作業1: オフラインセンサー（nested hyper-v/VM）を設定する](#Task-1-Set-up-your-nested-Virtual-Machine)
    - [作業2: オフライン用の Microsoft Denfender for IoT を構成する](#Task-2-Configure-a-Microsoft-Defender-for-IoT-offline-sensor)
 - [演習 #3: システム設定を有効にする](#exercise-3-enabling-system-settings)
    - [作業1: システム プロパティ](#task-1-System-properties)
@@ -41,7 +41,7 @@
    - [作業2: データコネクターを接続する](#Task-2-Connecting-Data-Connectors)
    - [作業3: アラートを確認し PCAP を実行する](#Task-3-Acknowledge-Alerts-and-Re-run-PCAPs)
    - [作業4: IoT インシデントと Sentinel の連携](#Task-4-Sentinel-interaction-with-IoT-Incidents)
-   - [作業5: Kusto クエリでアラート詳細を検索する ](#Task-5-Kusto-Query-Language-to-Find-Alert-Details)
+   - [作業5: Kusto クエリ言語 でアラート詳細を検索する ](#Task-5-Kusto-Query-Language-to-Find-Alert-Details)
 - [演習 #7: クリーンアップ](#Exercise-7-Clean-Up)
    - [作業1: リソースの削除](#Task-1-Delete-resources)
 - [付録 #1: トラブルシューティング](#Appendix-1-Troubleshooting)
@@ -141,7 +141,7 @@ Defender for IoT センサーをホストする 仮想PC(VM) への接続には 
 ## 演習 #2: オフラインセンサーを設定する
 この作業は [事前準備](../Before%20HOL/Microsoft%20Defender%20for%20IoT%20BHOL.md "Microsoft Defender for IoT Before Hands-on-Lab") で作成した VM 上で行います
 
-### 作業 1: オフラインセンサー（nested VM）を設定する
+### 作業 1: オフラインセンサー（nested hyper-v/VM）を設定する
 
 事前準備で作成した WIndows 10 VM に RDP でログインします  
 
@@ -197,93 +197,100 @@ Defender for IoT センサーをホストする 仮想PC(VM) への接続には 
 
 ### 作業2: オフライン用の Microsoft Denfender for IoT を構成する
 
-### Task 2: Configure a Microsoft Defender for IoT offline sensor
+ここでは Microsoft Defender を 以前設定した IP アドレスに基づき設定します  
 
 During this task we will configure Azure Defender based on the IPs highlighted before, this first configuration will be based on an offline sensor.
 
-1. In the Hyper-V Manager, find the **Connect...** in the lower right hand of the screen and click on it, and in the newly opened VM connection window click **Start**.
+1. Hyper-V Manager で画面右下にある **Connect...** をクリック、表示された仮想マシンのウィンドウで **Start** をクリックします
 
-1. When you connect to the Ubuntu VM you should see the following screen to start the configuration process. 
-
-   > **Note!**: If you don't see the screen below, your installation timed out or you pressed enter, selecting a different configuration by mistake, delete the virtual machine and start this task over. The timeout period is relatively short so make sure you connect immediately to the nested VM and select the language and the sensor type (in Task 2).
+   > **Note!**: 以下の画面が表示されない場合は、インストールがタイムアウトしたか、違う設定を選択して Enter を入力された可能性がありますので、仮想マシンを削除してこのタスクをやり直してください (タイムアウト時間は比較的短いため、出来るだけ早く仮想マシンに接続し、言語とセンサーの種類を選択ください)
 
    ![Connect to Sensor](./images/E2T2-connect-to-sensor.png 'Initial connect to offline Sensor')
 
-1. Press **Enter** for English.
+1. English が選択された状態で **Enter** を入力します
 
-1. Select the third option *(Office 4CPUs)* and press **Enter**.
+1. (カーソルキーで) メニューの3つめ *(Office 4CPUs...)* を選択し **Enter** を入力します
 
    ![Setting up Sensor](./images/E2T2-sensor-type.png 'Setting up the offline Sensor')
 
-   At this moment, the offline sensor will be installed (including its operating system). This installation takes some time, expect it to run for approximately 15 minutes.
+   ここでオフラインセンサーがインストールされます (OSを含む)  
+   このインストールは約15分程度かかります  
 
-1. As part of the installation process, you will be asked to provide some parameters, it is ***VERY IMPORTANT*** you paid attention to the previous task because you will use the network information you captured before. This information is unique to each Virtual Machine. So the following is an **EXAMPLE**.
+1. インストールプロセスの一部としていくつかのパラメーターを入力します、
 
-   - **configure hardware profile**: **office**, then press enter. 
-   - **Configure network interface**, type **eth0**
-   - **Configure management network interface**: in this example we're using **192.168.0.50**, you will use one of the **Ipv4 Addresses** depending on your network scope from the previous task, either **192.168.0.50 or 172.27.0.50**. Click Enter to continue. ***Take a note of this IP you will need it later on***.
-   - **Subnets mask**: **255.255.255.0** this will be the SAME for everyone.
-   - **Configure DNS**: **8.8.8.8**
-   - **Configure default gateway IP Address**: We are intentionaly mis-configuring this value to force the sensor in **offline** mode. Use either 192.168.0.**2** or 172.27.0.**2**.
-   - **Configure input interface(s)**: **eth1**
-   - **Configure bridge interface**: Just press Enter
-   - Then type **Y** to apply the changes and click **Enter**.
+   この設定は **非常に重要** です  
+   ネットワーク設定はここまでに設定したネットワーク情報にも関連し、仮想マシンに対して**固有** となります
 
-   Below, a ***sample*** screen, your parameters might be different.
+   - **configure hardware profile**: **office** を入力して **Enter**
+   - **configure network interface**, **eth0** を入力して **Enter**
+   - **configure management network interface**: (今回の例では) **192.168.0.50** 、または **172.27.0.50** を入力して **Enter**
+   - **subnets mask**: **255.255.255.0** を入力して **Enter**
+   - **configure DNS**: **8.8.8.8** を入力して **Enter**
+   - **configure default gateway IP Address**: 192.168.0.**2** または 172.27.0.**2** を入力して **Enter** (センサーを強制的に **オフライン** にするために、意図的に**誤**設定します)
+   - **configure input interface(s)**: **eth1** を入力して **Enter**
+   - **configure bridge interface**: **Enter** (値は何も入力しない)
+   - **Y** を入力して **Enter**.
+
+   以下は **入力例** です (環境により異なるかもしれません)
 
    ![Configuring Sensor](./images/E2T2-defender-config.png 'Configuring the offline Sensor')
 
-   Now the installation will continue running for another 10-15 minutes.
+   入力後インストールが継続し、(再度) 10-15分程度かかります  
 
-1. ***IMPORTANT STEP!!!*** Once the installation is complete, you will have the login information availabe in the screen **TAKE A SCREENSHOT!!** before continuing, press **Enter**. Now you will have the support account login information, again **TAKE THE SCREENSHOT!!** press **Enter** to continue. If you fail to capture the credentials, you will need to start over.
+1. ***非常に重要なステップです!!!*** インストールが完了するとログイン情報が表示されますので、**画面のスクリーンショットを取得して** から **Enter** を入力、続いてサポートアカウント情報が表示されますので、再度 **画面のスクリーンショットを取得して** から **Enter** を入力します
+
+   > ***Note!**: スクリーンショットの取得に失敗すると、作業を最初からやり直しになりますのでご注意ください*
 
    ![Sensor Credentials](./images/E2T2-credentials.png 'Saving Sensor Credentials')
 
-1. Once the installation finished you will ask to login, enter the credentials from previous step. In this screen you can also validate the IP, you will use that IP in your browser.
+1. インストールが完了するとログインが求められますので直前のステップで得た情報を入力してください  
 
-   ***Note:** At this stage your IPs should look similar to the example below. If you can't reach the portal validate the IPs. If you restarted your VM there is a chance your IPs changed so you will need to go back and reconfigure them, if that is the case follow the troubleshooting guidance below.*
+   この画面では、後にブラウザからアクセスする際に用いる IP アドレスを確認することができます  
 
-   ***Troubleshooting Note:** Once the installation is complete, you will be able to access Azure Defender Console.
-   Check if you can open a cmd window, ping the IP Address you entered in the step 'Configure management network interface'.
-   If the request times out, you will need to reconfigure this step again, for that review the IPs one more time and use the command below to start over:*
+   > ***Note!**: この段階では IP は以下の例のように見えるはずですが、もしアクセスできない場合には IP を検証してください (VMを再起動した場合、IPが変更されている可能性がありますので、戻って再設定の必要があります)*
+
+   > ***Troubleshooting Note:***
 
    ```bash
    sudo cyberx-xsense-network-reconfigure
    ```
 
-   In the next steps you will be prompt to enter the password capture above, some characteres look alike but they are not, this image will help you to identify some of them.
+   パスワードを入力する際、いくつか似て異なる文字が存在することに注意してください  
+   以下の画像を参考にしてください
 
    ![Defender characters](./images/E2T2-characters.png 'Different defender characteres')
 
-1. Login with the credentials provided in step **4**.
+1. ステップ **6** で提供されたログイン情報を用いてログインします
 
    ![Defender IP](./images/E2T2-AzureDefenderForIoTSensor.png 'Defender IP Address')
 
-   > **NOTE:** the "md4iotsensoroffline" VM's keyboard layout is US by default, and it may not match the layout of your physical keyboard. To avoid issues when entering the password, you may use the windows 10 on-screen keyboard. To run it, type "osk" in the search box and click on "On-Screen Keyboard"...
+   > **Note:** "md4iotsensoroffline" 仮想マシンのキーボードは標準で US になっていますので、作業PCのレイアウトと一致しない可能性があります  
+   > Windows 10 のオンスクリーンキーボード でパスワード入力時のトラブルを回避可能です  
+   > タスクバーの検索ボックスで **osk** と入力すると表示される "On-Screen Keyboard" を実行し、
 
    ![Start-OSK](./images/E2T2-Start-OSK.png 'Start on-screen keybaord')
 
-   > ...and use it to enter the credentials:
+   > クレデンシャル入力時に利用します
 
    ![OSK-Keyboard-Logon](./images/E2T2-keyboard.png)
 
-1. Next, you will be ask to activate the product, click **Upload**, then **Browse Files**, in your downloads folder select the file you downloaded from the Storage Explorer, in this example **myofflinesensor.zip**.
+1. ログイン後、製品のアクティベーションが求められますので **Upload** をクリック、**Browse Files** をクリック、ダウンロードフォルダを選択してライセンスファイルを指定します (例:myofflinesensor_activation_10.X.zip)
 
    ![Defender Login](./images/E2T2-offline-sensor-activation.png 'Defender Login Screen')
 
-1. Click **Approve these terms and Conditions**, then **Activate**.
+1. **Approve these terms and Conditions** をクリックして **Activate** をクリックします
 
-1. You will be prompted to select **SSL/TLS Certificates | Onboarding 1/2** for this lab will use the second option **Use a locally generated self signed certificate(..)**. Then click **I CONFIRM**, **Next**.
+1. 続いて **SSL/TLS Certificates | Onboarding 1/2** の設定が表示されますので、**Use a locally generated self signed certificate(..)** をクリック、**I CONFIRM** のチェックを入れ **Next** をクリックします
 
    ![Certificate selection](./images/E2T2-offline-sensor-certificate.png 'Defender certificate selection')
 
-1. For this lab in the next step we will **Disable** the system wide validation. **Finish**.
+1. 続いて **SSL/TLS Certificates | Onboarding 2/2** の設定は **Disable** で **Finish** をクリックします
 
-1. Let's analyze together what information we already have available before moving forward.
+事前に取得した情報を用いて分析してみましょう  
 
-## Exercise 3: Enabling system settings
+## 演習 #3: システム設定を有効にする
 
-### Task 1: System Properties
+### 作業1: システム プロパティ
 
 1. In your offline sensor you will find **System Settings** on the left side of the Azure Defender portal, click there as shown below.
 
@@ -307,7 +314,7 @@ During this task we will configure Azure Defender based on the IPs highlighted b
 
    ![Pcap Player](./images/E3T1-PCAP-Player.png 'Pcap player')
 
-### Task 2: Pcap Files
+### 作業2: PCAP ファイル
 
 1. In a previous step you already downloaded a  **holpcaps.zip** file from the Storage account. It should be in your Azure Virtual Machine's **Downloads** folder.
 
@@ -322,11 +329,11 @@ During this task we will configure Azure Defender based on the IPs highlighted b
 
 1. Click on **Play All**, in a few minutes you will receive a message saying all the files has been played. 
 
-## Exercise 4: Analyzing the Data
+## 演習 #4: データを分析する
 
 After Defender for Cloud learnt about your environment it will be able to share insights pretty fast.
 
-### Task 1: Devices Map
+### 作業1: デバイスマップ
 
 Your first interaction with Devices map you will see a similar map like the one below (details of what you actually see may vary):
 
@@ -352,7 +359,7 @@ Your first interaction with Devices map you will see a similar map like the one 
 
    ![cip](https://user-images.githubusercontent.com/60540284/140970072-7db949da-f87c-41ef-88c0-45cea6da0f62.gif)
 
-### Task 2: Alerts
+### 作業2: アラート
 
 1. Once you click Alerts in your PLC you will see a new window pop up showing three different types of alerts.
 
@@ -369,7 +376,7 @@ Your first interaction with Devices map you will see a similar map like the one 
 
    ![ex4-t2-2-3](https://user-images.githubusercontent.com/60540284/141076872-1b8350d6-ad56-4444-995d-256ce0785c81.gif)
 
-### Task 3: Device Inventory
+### 作業3: デバイス インベントリ
 
 1. In this view, filter all your devices by **Is Authorized**, True or False are possible values.
 
@@ -381,7 +388,7 @@ Your first interaction with Devices map you will see a similar map like the one 
 
 1. Export the list to a csv files.
 
-### Task 4: Event Timeline
+### 作業4: イベントタイムライン
 
 This view will allow you a Forensic analysis of your alerts.
 
@@ -389,7 +396,7 @@ This view will allow you a Forensic analysis of your alerts.
 
    ![Event-Time-Line-by-CIP](./gifs/MD4IoT-EventTimeline.gif)
 
-### Task 5: Data Mining
+### 作業5: データ マイニング
 
 In this section you can create multiple custom reports.
 As an example we will create a Report based on firmware updates versions.
@@ -406,15 +413,15 @@ As an example we will create a Report based on firmware updates versions.
 
 1. Export you report(pdf, csv) for further actions. 
 
-### Task 6: Risk Assessment
+### 作業6: リスク アセスメント
 
 1. Go to the Risk assessment, run the assessment. During this task we will show you how to analyze the assessment. 
 
-## Exercise 5: Online Sensor
+## 演習 #5: オンラインセンサーを設定する
 
 To modify our sensor to become an online sensor, we will use the same virtual machine that we used for the offline sensor, but we will reactivate the sensor using **System settings**. In a real scenario you probably would create a new sensor, running in its own virtual machine or physical appliance.
 
-### Task 1: Reconfiguring sensor
+### 作業1: センサーの再設定
 
 To modify your sensor to be connected with Azure, you will need to modify the network configuration.
 
@@ -450,13 +457,13 @@ To modify your sensor to be connected with Azure, you will need to modify the ne
 
    ![IoTHub](./images/E5T1-IoTHub-SecurityAlerts.png 'IoT Hub Security Alerts')
 
-## Exercise 6: Integrate with Sentinel
+## 演習 #6: Sentinel と統合する
 
 You will execute most of this task on your physical machine, not in the Virtual Machine that hosts your your Microsoft Defender for IoT sensor.
 
 > **Note**: Please ensure you have completed Task 6 in the ['Before HOL'](../Before%20HOL/Microsoft%20Defender%20for%20IoT%20BHOL.md "Microsoft Defender for IoT Before Hands-on-Lab") instructions prior to working through the following tasks.
 
-### Task 1: Enabling IoT to Integrate with Sentinel
+### 作業1: IoT を Sentinel に統合する
 
 1. Ensure your IoT Hub is configured to send Security Alerts to Sentinel.
 1. Navigate to your IoT Hub > Defender for IoT > Settings > Data Collection
@@ -467,7 +474,7 @@ You will execute most of this task on your physical machine, not in the Virtual 
  
    ![Data Collection DIoT](./images/E6T1-Data-Collection-D4IoT.png 'Data Collection D4IoT')
 
-### Task 2: Connecting Data Connectors
+### 作業2: データコネクターを接続する
 	
 1. With the *Microsoft Defender for IoT* switch enabled, go to **Microsoft Sentinel** > Configuration > Data Connectors > Search **Microsoft Defender for IoT** to connect Microsoft Defender for IoT to Microsoft Sentinel.
  
@@ -497,7 +504,7 @@ You will execute most of this task on your physical machine, not in the Virtual 
 
    ![SentinelAnalyticsScreen](./images/E6T2-Sentinel-Analytics-Screen.png 'Sentinel Analytics Screen')
 
-### Task 3: Acknowledge Alerts and Re-run PCAPs
+### 作業3: アラートを確認し PCAP を実行する
 
 You will execute most of this task on the Virtual Machine that hosts your your Microsoft Defender for IoT sensor.
 
@@ -514,7 +521,7 @@ You will execute most of this task on the Virtual Machine that hosts your your M
 
    ![Rerun-pcaps](./images/E6T3-Rerun-pcaps.png 'Rerun pcaps')
 
-### Task 4: Sentinel interaction with IoT Incidents
+### 作業4: IoT インシデントと Sentinel の連携
 
 You will execute most of this task on your physical machine, not in the Virtual Machine that hosts your your Microsoft Defender for IoT sensor.
 
@@ -534,7 +541,7 @@ You will execute most of this task on your physical machine, not in the Virtual 
 
    ![IncidentInvestigate](./images/E6T4-Sentinel-Incident-Investigate.png 'Incident Investigate')
 
-### Task 5: Kusto Query Language to Find Alert Details
+### 作業5: Kusto クエリ言語 でアラート詳細を検索する
 
 1. Navigate to the “Logs” tab and run this query. Querying the data will provide the ability to join tables and datasets to curate data from multiple sources. KQL is a similar language to SQL but will take some research and some dedicated time to become familiar with.
 
@@ -552,9 +559,9 @@ You will execute most of this task on your physical machine, not in the Virtual 
  
    ![KustoQuery2](./images/E6T5-FindAlerts-IoTHub.png 'kusto query 2')
 
-## Exercise 7: Clean Up
+## 演習 #7: クリーンアップ
 
-### Task 1: Delete resources
+### 作業1: リソースの削除
 
 The Azure Passes will allow you to run the services for 90 days for training purposes. Although it is a best practice to delete all your resources after the training. 
 
@@ -567,7 +574,7 @@ Enter your-resource-group-name for **TYPE THE RESOURCE GROUP NAME** and select D
 After that is done go to Microsoft Defender for IoT and deactivate the subscription.
 
 
-## Appendix 1: Troubleshooting
+## 付録 #1: トラブルシューティング
 
 1. If your Defender portal is not working properly run the following command to validate if the components are running properly
 
