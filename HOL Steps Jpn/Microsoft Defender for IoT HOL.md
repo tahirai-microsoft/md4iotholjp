@@ -18,33 +18,34 @@
 
 ## **コンテンツ:** ##
 
-- [演習 #1: Defender を有効化する](#Exercise-1-Enabling-Defender)
-   - [作業 1: Microsoft Defender for IoT を有効化する](#Task-1-Enabling-Microsoft-Defender-for-IoT)
-   - [作業 2: IoT Hub を作成する](#Task-2-Create-an-IoT-Hub)
-   - [作業 3: センサーをオンボード（有効化）する](#Task-3-Onboarding-sensors)
-- [演習 #2: オフラインセンサーを設定する](#Exercise-2-Setting-up-your-offline-sensor)
-   - [作業1: オフラインセンサー（nested hyper-v/VM）を設定する](#Task-1-Set-up-your-nested-Virtual-Machine)
-   - [作業2: オフライン用の Microsoft Denfender for IoT を構成する](#Task-2-Configure-a-Microsoft-Defender-for-IoT-offline-sensor)
-- [演習 #3: システム設定を有効にする](#exercise-3-enabling-system-settings)
-   - [作業1: システム プロパティ](#task-1-System-properties)
-   - [作業2: PCAP ファイル](#task-2-Pcap-Files)
-- [演習 #4: データを分析する](#Exercise-4-Analyzing-the-Data)
-   - [作業1: デバイスマップ](#Task-1-Devices-Map)
-   - [作業2: アラート](#Task-2-Alerts)
-   - [作業3: デバイス インベントリ](#Task-3-Device-Inventory)
-   - [作業4: イベントタイムライン](#Task-4-Event-Timeline)
-   - [作業5: データ マイニング](#Task-5-Data-Mining)
-- [演習 #5: オンラインセンサーを設定する](#Exercise-5-Online-Sensor)
-   - [作業1: センサーの再設定](#Task-1-reconfiguring-sensor)
-- [演習 #6: Sentinel と統合する](#Exercise-6-Integrate-with-Sentinel)
-   - [作業1: IoT を Sentinel に統合する](#Task-1-Enabling-IoT-to-Integrate-with-Sentinel)
-   - [作業2: データコネクターを接続する](#Task-2-Connecting-Data-Connectors)
-   - [作業3: アラートを確認し PCAP を実行する](#Task-3-Acknowledge-Alerts-and-Re-run-PCAPs)
-   - [作業4: IoT インシデントと Sentinel の連携](#Task-4-Sentinel-interaction-with-IoT-Incidents)
-   - [作業5: Kusto クエリ言語 でアラート詳細を検索する ](#Task-5-Kusto-Query-Language-to-Find-Alert-Details)
-- [演習 #7: クリーンアップ](#Exercise-7-Clean-Up)
-   - [作業1: リソースの削除](#Task-1-Delete-resources)
-- [付録 #1: トラブルシューティング](#Appendix-1-Troubleshooting)
+- [演習 #1: Defender を有効化する](#演習-1-defender-を有効化する)
+   - [作業 1: Microsoft Defender for IoT を有効化する](#作業-1-microsoft-defender-for-iot-を有効化する)
+   - [作業 2: IoT Hub を作成する](#作業-2-iot-hub-を作成する)
+   - [作業 3: センサーをオンボード (有効化) する](#作業-3-センサーをオンボード-有効化-する)
+- [演習 #2: オフラインセンサーを設定する](#演習-2-オフラインセンサーを設定する)
+   - [作業1: オフラインセンサー (nested hyper-v/VM) を設定する](#作業-1-オフラインセンサー-nested-hyper-vvm-を設定する)
+   - [作業2: オフライン用の Microsoft Denfender for IoT を構成する](#作業-2-オフライン用の-microsoft-denfender-for-iot-を構成する)
+- [演習 #3: システム設定を有効にする](#演習-3-システム設定を有効にする)
+   - [作業1: システム プロパティ](#作業-1-システム-プロパティ)
+   - [作業2: PCAP ファイル](#作業-2-pcap-ファイル)
+- [演習 #4: データを分析する](#演習-4-データを分析する)
+   - [作業1: デバイスマップ](#作業-1-デバイスマップ)
+   - [作業2: アラート](#作業-2-アラート)
+   - [作業3: デバイス インベントリ](#作業-3-デバイス-インベントリ)
+   - [作業4: イベントタイムライン](#作業-4-イベント-タイムライン)
+   - [作業5: データ マイニング](#作業-5-データ-マイニング)
+   - [作業6: リスク アセスメント](#作業-6-リスク-アセスメント)
+- [演習 #5: オンラインセンサーを設定する](#演習-5-オンラインセンサーを設定する)
+   - [作業1: センサーの再設定](#作業-1-センサーの再設定)
+- [演習 #6: Sentinel と統合する](#演習-6-sentinel-と統合する)
+   - [作業1: IoT を Sentinel に統合する](#作業-1-iot-を-sentinel-に統合する)
+   - [作業2: データコネクターを接続する](#作業-2-データコネクターを接続する)
+   - [作業3: アラートを確認し PCAP を実行する](#作業-3-アラートを確認し-pcap-を実行する)
+   - [作業4: IoT インシデントと Sentinel の連携](#作業-4-iot-インシデントと-sentinel-の連携)
+   - [作業5: Kusto クエリ言語 でアラート詳細を検索する ](#作業-5-kusto-クエリ言語-でアラート詳細を検索する)
+- [演習 #7: クリーンアップ](#演習-7-クリーンアップ)
+   - [作業1: リソースの削除](#作業-1-リソースの削除)
+- [付録 #1: トラブルシューティング](#付録-1-トラブルシューティング)
 
 ## 演習 #1: Defender を有効化する
 ### 作業 1: Microsoft Defender for IoT を有効化する
@@ -93,7 +94,7 @@
 
    ![Contributor Role](./images/E1T2-Subscription-Contributor-role.png)
 
-### 作業 3: センサーをオンボード（有効化）する
+### 作業 3: センサーをオンボード (有効化) する
 この作業は PC から Azure ポータルにアクセスして行います  
 
 このハンズオンではインターネットへの接続が不要なオフラインセンサーと、Azure に接続されたオンラインセンサーの両方を利用します  
@@ -141,7 +142,7 @@ Defender for IoT センサーをホストする 仮想PC(VM) への接続には 
 ## 演習 #2: オフラインセンサーを設定する
 この作業は [事前準備](../Before%20HOL/Microsoft%20Defender%20for%20IoT%20BHOL.md "Microsoft Defender for IoT Before Hands-on-Lab") で作成した VM 上で行います
 
-### 作業 1: オフラインセンサー（nested hyper-v/VM）を設定する
+### 作業 1: オフラインセンサー (nested hyper-v/VM) を設定する
 
 事前準備で作成した WIndows 10 VM に RDP でログインします  
 
@@ -195,7 +196,7 @@ Defender for IoT センサーをホストする 仮想PC(VM) への接続には 
 1. 作成した VM を右クリック、**Add Hardware** セクションの **Settings** を選択、 **Network Adapter** を選択し、**Add** をクリック、ここで **My Switch** という名前で以前作成した Virtual Switch を選択し、**Apply** 、続いて **OK** をクリック、仮想プロセッサー数を **1** から **4** に増やし、**Apply** 、続いて **OK** をクリックします
 
 
-### 作業2: オフライン用の Microsoft Denfender for IoT を構成する
+### 作業 2: オフライン用の Microsoft Denfender for IoT を構成する
 
 ここでは Microsoft Defender を 以前設定した IP アドレスに基づき設定します  
 
@@ -292,7 +293,7 @@ During this task we will configure Azure Defender based on the IPs highlighted b
 
 ## 演習 #3: システム設定を有効にする
 
-### 作業1: システム プロパティ
+### 作業 1: システム プロパティ
 
 1. センサー画面の左メニューにある **System Settings** をクリックします
 
@@ -316,7 +317,7 @@ During this task we will configure Azure Defender based on the IPs highlighted b
 
    ![Pcap Player](./images/E3T1-PCAP-Player.png 'Pcap player')
 
-### 作業2: PCAP ファイル
+### 作業 2: PCAP ファイル
 
 In a previous step you already downloaded a  **holpcaps.zip** file from the Storage account. It should be in your Azure Virtual Machine's **Downloads** folder.  
 
@@ -333,7 +334,7 @@ In a previous step you already downloaded a  **holpcaps.zip** file from the Stor
 
 環境学習が完了すると、非常に迅速な洞察が可能になります  
 
-### 作業1: デバイスマップ  
+### 作業 1: デバイスマップ  
 
 初めてデバイスマップを操作する際には以下のようなマップが表示されます (内容が異なる場合もあります)  
    ![Device Map](./images/E4T1-devices-map.png 'Device Map')
@@ -358,7 +359,7 @@ In a previous step you already downloaded a  **holpcaps.zip** file from the Stor
    このビューで PLC のバックボーンを分析し、アクションをとり、アラートを分析できます  
    ![cip](https://user-images.githubusercontent.com/60540284/140970072-7db949da-f87c-41ef-88c0-45cea6da0f62.gif)
 
-### 作業2: アラート
+### 作業 2: アラート
 
 1. PLCの Alerts をクリックすると新しいウィンドウが開き、3種類のアラートが表示されます  
 
@@ -373,7 +374,7 @@ In a previous step you already downloaded a  **holpcaps.zip** file from the Stor
 1. 異なるシナリオをフィルターするために **Advanced Filters** をクリック、**All Device Group** から **Unclassified subnets** のような **Custom Groups** をクリックし **Confirm** をクリックします
    ![ex4-t2-2-3](https://user-images.githubusercontent.com/60540284/141076872-1b8350d6-ad56-4444-995d-256ce0785c81.gif)
 
-### 作業3: デバイス インベントリ
+### 作業 3: デバイス インベントリ
 
 1. 全てのデバイスを **Is Authorized** でフィルタリングします (値は True または False となります)  
 
@@ -384,14 +385,14 @@ In a previous step you already downloaded a  **holpcaps.zip** file from the Stor
 1. フィルターに基づきデバイスを整理します  
 1. リストを CSV ファイルとしてエクスポートします
 
-### 作業4: イベントタイムライン
+### 作業 4: イベント タイムライン
 
 このビューではアラートのフォレンジック分析が可能です
 
 1. **Advanced Filters** を選択、タイムラインを **CIP** でフィルタリングして、アラートタイムラインを分析します  
    ![Event-Time-Line-by-CIP](./images/gifs/MD4IoT-EventTimeline.gif)
 
-### 作業5: データ マイニング
+### 作業 5: データ マイニング
 
 このセクションでは複数のカスタムレポートを作成することができます  
 例として、ファームウェアの更新バージョンに基づくレポートを作成します  
@@ -410,7 +411,7 @@ In a previous step you already downloaded a  **holpcaps.zip** file from the Stor
 
 1. レポート (PDF/CSV) をエクスポートして、今後の作業に役立てることができます  
 
-### 作業6: リスク アセスメント
+### 作業 6: リスク アセスメント
 
 1. **Risk Assessment** に移動し、**Generate Report** をクリックします  
 タスク実行中、どのようにしてアセスメントを分析するかをご紹介します  
@@ -420,7 +421,7 @@ In a previous step you already downloaded a  **holpcaps.zip** file from the Stor
 今回は、ここまで使用したオフラインセンサー (の仮想マシン) をオンラインセンサーとして再利用します  
 現実のシナリオではおそらく独自の仮想マシン、または物理アプライアンスで動作する新しいセンサーを作成することになります  
 
-### 作業1: センサーの再設定
+### 作業 1: センサーの再設定
 
 センサーを Azure に接続するため、ネットワーク設定を変更します
 
@@ -465,89 +466,97 @@ You will execute most of this task on your physical machine, not in the Virtual 
 
 > **Note**: Please ensure you have completed Task 6 in the ['Before HOL'](../Before%20HOL/Microsoft%20Defender%20for%20IoT%20BHOL.md "Microsoft Defender for IoT Before Hands-on-Lab") instructions prior to working through the following tasks.
 
-### 作業1: IoT を Sentinel に統合する
+### 作業 1: IoT を Sentinel に統合する
 
-1. Ensure your IoT Hub is configured to send Security Alerts to Sentinel.
-1. Navigate to your IoT Hub > Defender for IoT > Settings > Data Collection
+1. セキュリティアラート を Sentinel に送信するよう IoT Hub が設定されていることを確認します
+1. IoT Hub > Defender for IoT > 設定 > Data Collection に移動します
 
    ![Data Collection](./images/E6T1-Data-Collection.png 'IoTHub Data Collection')
 
-1. Double check that Data Collection blade, is enabled for **Enable Microsoft Defender for IoT**
- 
+1. **Enable Microsoft Defender for IoT** が有効になっていることを再確認します
+
    ![Data Collection DIoT](./images/E6T1-Data-Collection-D4IoT.png 'Data Collection D4IoT')
 
-### 作業2: データコネクターを接続する
-	
-1. With the *Microsoft Defender for IoT* switch enabled, go to **Microsoft Sentinel** > Configuration > Data Connectors > Search **Microsoft Defender for IoT** to connect Microsoft Defender for IoT to Microsoft Sentinel.
+### 作業 2: データコネクタを接続する
+
+1. *Microsoft Defender for IoT* スイッチが有効になっている状態で、**Microsoft Sentinel** > 構成 > データ コネクタ > **Microsoft Defender for IoT** を検索し、Microsoft Defender for IoT を Microsoft Sentinel に接続します
  
    ![DataConnectorsSentinel](./images/E6T2-Data-Connectors-Sentinel.png 'Data Connectors Sentinel')
 
-1. Click the **Open Connector Page**
+1. **コネクタ ページを開く** をクリックします
  
    ![DataConnectorsIoT](./images/E6T2-Data-Connectors-IoT.png 'Data Connectors IoT')
 
-1. Review the instructions and click the “Connect” button to connect Microsoft Defender for IoT to Sentinel. If the connection continues to fail, this will most likely be due to the user not having the "Contributor" permissions and you may have missed the access step in the prerequisites. 
+1. "接続" ボタンをクリックして Microsoft Defender for IoT を Sentinel に接続します  
+   接続に失敗する場合、ユーザーが "共同作成者" アクセス許可を持っていない可能性があります
 
    ![Sentinel Connect](./images/E6T2-Sentinel-Connect.png 'Sentinel Connect')
 
-1. If connected correctly you should expect to see the Status change to “Connected” and the link light up green.
+1. 正しく接続された場合は、ステータスが "接続済み" に変わり、リンクが緑色に点灯します  
  
    ![Sentinel Connect 2](./images/E6T2-Sentinel-Connected.png 'Sentinel Connect 2')
 
-1. Use the next steps tab to enable Out of the Box alerts. For example, click the create rule and follow the instructions to turn on the rule.
+1. "次の手順" タブを利用して、Box アラートを有効にします  
+   例えば "ルールの作成" をクリックし、指示に従ってルールを有効にします  
  
    ![SentinelRuleCreation](./images/E6T2-Create-OOB-Rule.png 'Sentinel Rule Creation')
 
-1. Fill in the “Name” and click **Review and Create**, followed by **Create**. This is enabling incidents to be created based on the Azure Defender IoT alerts that are ingested into Sentinel.
- 
+1. "名前" を入力し、"確認と作成" をクリック、続いて "作成" をクリックします  
+   これにより、Microsoft Defenfer for IoT アラート基づいてインシデントを作成できます
+
    ![SentinelRuleSubmission](./images/E6T2-OOB-Rule-Created.png 'Sentinel Rule Submission')
 
-1. Additionally, you can create the rule not only on the data connectors page but also on the Microsoft Sentinel “Analytics” blade. See an example below when you go to the “Rule Templates” tab and filter data sources by “Microsoft Defender for IoT (Preview)”.
+1. 更にデータコネクタ ページだけでなく Microsoft Sentinel の "分析" ブレードでもルールを作成できます  
+   "規則のテンプレート" タブに移動し、“Microsoft Defender for IoT (Preview)” でデータソースをフィルター処理する場合は、以下の例を参照してください  
 
    ![SentinelAnalyticsScreen](./images/E6T2-Sentinel-Analytics-Screen.png 'Sentinel Analytics Screen')
 
-### 作業3: アラートを確認し PCAP を実行する
+### 作業 3: アラートを確認し PCAP を実行する
 
-You will execute most of this task on the Virtual Machine that hosts your your Microsoft Defender for IoT sensor.
+この作業は Microsoft Defender for IoT センサーをホストする仮想マシン上で行います  
 
-1. Go back to your browser interface and acknowledge all of the alerts. The reason we are doing this is so we can re-run the alerts to show how they are sent and analyzed by Sentinel.
+1. センサーのダッシュボード(ブラウザ) のアラートに移動し、全てのアラートを確認 (Acknowledge All) します  
+   これにより、アラートの再実行結果が Sentinel にどのように送信され、分析されるか確認できます
 
-	1. Navigate to the Alerts Page
-	1. Click the double check box
-	1. Click **Ok** to acknowledge the alerts 
+	1. Alerts に移動します
+	1. 二重チェックボックスをクリックします
+	1. **Ok** をクリックしてアラートを確認します 
     
    ![iot-portal-acknowledge-alerts](./images/E6T3-IoT-Portal-Ack-Alerts.png 'IoT Portal Acknowledge alerts')
 
-    1. Now go to the System Setting tab.
-    1. Click the **Play All** on the PCAP Files to replay simulating the alerts.
+    1. System Setting に移動します
+    1. PCAP Player の **Play All** をクリックして、アラート シミュレーションを再実行します  
 
    ![Rerun-pcaps](./images/E6T3-Rerun-pcaps.png 'Rerun pcaps')
 
-### 作業4: IoT インシデントと Sentinel の連携
+### 作業 4: IoT インシデントと Sentinel の連携
 
-You will execute most of this task on your physical machine, not in the Virtual Machine that hosts your your Microsoft Defender for IoT sensor.
+この作業は PC から Azure ポータルにアクセスして行います  
 
-1. Go back to the Sentinel console and under the **Threat Management** section, select the **Incidents** tab.  Filter by Product Name **Azure Defender for IoT**.
+1. Sentinel の画面に戻り、**脅威管理** セクションの **インシデント** タブをクリック、**Microsoft Defender for IoT" の製品名でフィルター処理します
 
    ![SentinelFilterAlerts](./images/E6T4-Sentinel-Incidents.png 'Sentinel Filter Alerts')
 
-1. Select one of the alerts and click **View full details**
+1. アラートの1つをクリック、続いて **全ての詳細を表示** をクリックします
 
    ![IncidentDetails](./images/E6T4-Sentinel-Incident-Details.png 'Incident Details')
 
-1. It will take you to this screen to get all the information relative to the incident. This allows analyst to get more details on the entity including what other alerts made up the incident, playbooks to enrich the context of the alert, and comments section to leave details on what the analyst discovered during review or how they came to the determination to dismiss the incident.
+1. インシデントに関する全ての情報はこの画面で取得できます  
+   インシデントを構成する他のアラート、アラートのコンテキストを豊かにするプレイブック、レビュー中にアナリストが発見したことや、インシデントの却下に至った方法に関する詳細を残すコメントセクションなど、エンティティの詳細を取得できます
 
    ![IncidentFullDetails](./images/E6T4-Sentinel-Incident-FullDetails.png 'Incident Full Details')
 
-1. By clicking the **Investigate** button, you can dig deeper in the cause of the incident and the relation to other incidents.
+1. **調査** をクリックして、インシデントの原因と他のインシデントとの関係を深く掘り下げます
 
    ![IncidentInvestigate](./images/E6T4-Sentinel-Incident-Investigate.png 'Incident Investigate')
 
-### 作業5: Kusto クエリ言語 でアラート詳細を検索する
+### 作業 5: Kusto クエリ言語 でアラート詳細を検索する
 
-1. Navigate to the “Logs” tab and run this query. Querying the data will provide the ability to join tables and datasets to curate data from multiple sources. KQL is a similar language to SQL but will take some research and some dedicated time to become familiar with.
+1. Sentinel の "ログ" タブに移動し、クエリを実行します  
+   データをクエリするとテーブルとデータセットを結合して複数ソースのデータを管理できます
+   KQL は SQL と同様の言語ですが、慣れ親しむためには時間と経験を必要とします  
 
-   Here are two basic examples:
+   2つの基本的な例を次に示します  
 
    ```sql
 	SecurityAlert | where ProviderName contains "IoTSecurity"
@@ -563,29 +572,27 @@ You will execute most of this task on your physical machine, not in the Virtual 
 
 ## 演習 #7: クリーンアップ
 
-### 作業1: リソースの削除
+### 作業 1: リソースの削除
 
-The Azure Passes will allow you to run the services for 90 days for training purposes. Although it is a best practice to delete all your resources after the training. 
+このハンズオンのために作成したリソースグループを検索して選択、**リソースグループの削除**  をクリックします  
 
-Search for the Resource Group created for this training.
+フィールドに削除対象のリソースグループ名を入力し (例:rg-md4iot-tahirai) **削除** をクリックします  
+この作業は数分かかります  
 
-Select Delete resource group on the top right side.
-
-Enter your-resource-group-name for **TYPE THE RESOURCE GROUP NAME** and select Delete. This operation will take a few minutes.
-
-After that is done go to Microsoft Defender for IoT and deactivate the subscription.
+リソースグループの削除完了誤、Microsoft Defender for IoT をサブスクリプションから無効化します  
 
 
 ## 付録 #1: トラブルシューティング
 
-1. If your Defender portal is not working properly run the following command to validate if the components are running properly
+1. 仮想マシン上のダッシュボードが正常に動作しない場合は、仮想マシンのターミナル上で次のコマンドを実行し、コンポーネントが正しく動作しているかを確認します  
 
    ```powershell
    cyberx-xsense-sanity
    ```
    ![Sanity check](./images/A1T1-sanity-check.png 'Sanity check')
 
-1. If your IoT hub is not receiving messages, check if ubuntu machine can reach IoT Hub, first run the following command to identify the IP of your IoT Hub:
+1. IoT Hub がメッセージを受信しない場合は、センサー (仮想マシン) が IoT Hub に到達できるかを確認します  
+   まず、以下のコマンドを実行して IoT Hub の IP を識別します  
 
    ```powershell
    netstat -na | grep EST | grep -v 127.0.0.1
@@ -593,7 +600,7 @@ After that is done go to Microsoft Defender for IoT and deactivate the subscript
 
    ![Sanity check](./images/A1T1-ips-connected.png 'Sanity check')
 
-   Then, ping the IoT Hub using the connection string from the overview blade in Azure Portal.
+   続いて IoT Hub のアドレスを用いて IoT Hub に Ping を実行します
 
    ![Ping IoT Hub](./images/A1T1-ping-iot-hub.png 'Ping IoT Hub')
 
