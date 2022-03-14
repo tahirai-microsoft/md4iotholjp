@@ -127,7 +127,7 @@
    - **名前:**  
    - **表示名:**  
    - **ゾーン:**  
-   
+
    ![Reg Online Sensor](./images/E1T3-register-online-sensor.png 'Online Sensor')
 
 1. **登録** をクリックします  
@@ -147,6 +147,7 @@ Defender for IoT センサーをホストする 仮想PC(VM) への接続には 
 
 1. コマンドプロンプトで "ipconfig" を実行します
 
+   ![Command Prompt](./images/E2T1-ipconfig.png 'Command Prompt inside VM')
 
 1. ホストの Ethernet アダプタ の IPアドレス を控えます、 (Default Switch) は無視してください
 
