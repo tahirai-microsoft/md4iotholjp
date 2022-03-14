@@ -1,8 +1,8 @@
 # Internet of Things - Microsoft Defender for IoT ハンズオン
 
-作業を開始する前に [事前準備](../Before%20HOL/Microsoft%20Defender%20for%20IoT%20BHOL.md "Microsoft Defender for IoT Before Hands-on-Lab") が完了しているか、今一度ご確認ください  
+作業を開始する前に [事前準備](../Before%20HOL%20Jpn/Microsoft%20Defender%20for%20IoT%20BHOL.md "Microsoft Defender for IoT Before Hands-on-Lab") が完了しているか、今一度ご確認ください  
 
-> 最終更新日: 2022/03/13  
+> 最終更新日: 2022/03/15  
 > 対象 : Defender for IoT 10.5.x
 
 ## アーキテクチャ ダイアグラム ##
@@ -276,7 +276,7 @@ During this task we will configure Azure Defender based on the IPs highlighted b
 
 1. ブラウザーでセンサーにログイン後、製品のアクティベーションが求められますので **Upload** をクリック、**Browse Files** をクリック、ダウンロードフォルダを選択してライセンスファイルを指定します (例: myofflinesensor_activation_10.X.zip)
 
-   ![Defender Login](./images/E2T2-offline-sensor-activation.png 'Defender Login Screen')
+   ![Defender Sensor Activation](./images/E2T2-offline-sensor-activation.png 'Defender Sensor Activation')
 
 1. **Approve these terms and Conditions** をクリックして **Activate** をクリックします
 
@@ -335,9 +335,8 @@ In a previous step you already downloaded a  **holpcaps.zip** file from the Stor
 
 ### 作業1: デバイスマップ  
 
-初めてデバイスマップを操作す際には以下のようなマップが表示されます (内容が異なる場合もあります)  
-
-![Device Map](./images/E4T1-devices-map.png 'Device Map')
+初めてデバイスマップを操作する際には以下のようなマップが表示されます (内容が異なる場合もあります)  
+   ![Device Map](./images/E4T1-devices-map.png 'Device Map')
 
 1. 左の4つのアイコンの上から3つめ、**layout options** から **Layout by Purdue** をクリックします  
    このモデルでは、企業ITとサイトオペレーションの間の様々なレイヤーを見ることができます  
@@ -390,7 +389,7 @@ In a previous step you already downloaded a  **holpcaps.zip** file from the Stor
 このビューではアラートのフォレンジック分析が可能です
 
 1. **Advanced Filters** を選択、タイムラインを **CIP** でフィルタリングして、アラートタイムラインを分析します  
-   ![Event-Time-Line-by-CIP](./gifs/MD4IoT-EventTimeline.gif)
+   ![Event-Time-Line-by-CIP](./images/gifs/MD4IoT-EventTimeline.gif)
 
 ### 作業5: データ マイニング
 
@@ -405,10 +404,9 @@ In a previous step you already downloaded a  **holpcaps.zip** file from the Stor
 
 1. 追加された **Firmware Version(GENERIC)** フィールドに **0.4.1** を入力し、**Save** をクリックします
 
-
-1. フィルタを削除して全てのファームウェアバージョンをリストアップすることもできます
-
    ![View-Report](./images/E4T5-View-Report.png 'View PLC Firmware Version Report')
+   
+1. フィルタを削除して全てのファームウェアバージョンをリストアップすることもできます
 
 1. レポート (PDF/CSV) をエクスポートして、今後の作業に役立てることができます  
 
@@ -419,41 +417,45 @@ In a previous step you already downloaded a  **holpcaps.zip** file from the Stor
 
 ## 演習 #5: オンラインセンサーを設定する
 
-To modify our sensor to become an online sensor, we will use the same virtual machine that we used for the offline sensor, but we will reactivate the sensor using **System settings**. In a real scenario you probably would create a new sensor, running in its own virtual machine or physical appliance.
+今回は、ここまで使用したオフラインセンサー (の仮想マシン) をオンラインセンサーとして再利用します  
+現実のシナリオではおそらく独自の仮想マシン、または物理アプライアンスで動作する新しいセンサーを作成することになります  
 
 ### 作業1: センサーの再設定
 
+センサーを Azure に接続するため、ネットワーク設定を変更します
+
 To modify your sensor to be connected with Azure, you will need to modify the network configuration.
 
-1. In your sensor's Azure Defender for IoT Portal (in the Virtual Machine), select **System Settings** and **Network**.
+1. センサーの画面から **System Settings** をクリック、続いて **Network** をクリックします
 
    ![NetworkSettings](./images/E5T1-SystemSettings-Networking.png 'Change Network Settings')
 
-1. Change the IP Address of the Default Gateway to 192.168.0.1 or 172.27.0.1, depending on the settings you used earlier in the HOL.
+1. Default Gateway の IP アドレスを 192.168.0.1 または 172.27.0.1 に変更します
  
    ![ChangeDefaultGatewayIP](./images/E5T1-Change-Default-Gateway.png 'Change Default Gateway IP') 
 
-1. On the "md4iotsensoroffline" Virtual Machine Connection, select **Action** and **Ctrl+Alt+Delete** to reboot the sensor.
+1. "md4iotsensoroffline" 仮想マシン接続画面の **Action** から **Ctrl+Alt+Delete** をクリックし、センサーを再起動します
 
    ![RebootSensor](./images/E5T1-Reset-Sensor-VM.png 'Reboot Sensor VM')
 
-1. Login to your sensor's Azure Defender for IoT Portal (in the Virtual Machine) again, select **System Settings** and then, **Reactivation**.
+1. (再起動後) 再びセンサーにブラウザでログインし、**System Settings** をクリック、続いて **Reactivation** をクリックします  
 
-1. In the new window, select **Upload**, **Browse File**, select the zip file you downloaded from the storage account in previous steps **myonlinesensor.zip**, then **Open** and **Activate**, **Ok** to the instructions
+1. Reactivation の画面で Upload をクリック、続いて **Browse File** をクリックし、オンラインセンサー用のライセンスファイルを選択し、**Open** をクリック、**Activate** 、**OK** をクリックします
 
    ![ReactivateSensor](./images/E5T1-Sensor-Reactivation.png 'Reactivate')
 
-1. Last, you should receive a message showing your sensor modified to **Connected**. 
+1. ここで、センサーが **Connected** に変更されたメッセージを受け取ります
 
-1. Close the screen, open again the **Reactivation** window and double check if your sensor is **Cloud Connected** as shown below:
+1. スクリーンを閉じ、再び **Reactivation** ウィンドウを開き、センサーが下図のように **Cloud Connected** になっているかどうか再確認します  
 
    ![OnlineSensor](./images/E5T1-CloudConnected-Sensor.png 'Reactivate as Online Sensor')
 
-1. Run the Pcap files again in your console. In a few minutes you can verify if IoT Hub in Azure Portal on your physical machine is receiving messages from your sensor:
+1. 再度 Pcap ファイルを再生し、数分後 Azure ポータル の IoT Hub がセンサーからメッセージを受信しているかどうかを確認します  
 
    ![IoT Hub Azure](./images/E5T1-Monitoring-IoTHub.png 'Monitoring IoT Hub')
 
-1. In the same IoT Hub now you should see the alerts generated by Defender for IoT. Scroll down to **Defender for IoT**, select **Security Alerts**, on the right side you will see some alerts already available.
+1. IoT Hub で Defender for IoT が生成したアラートが表示されるようになります  
+   メニューを **Defender for IoT** までスクロールし **Security Alerts** を選択すると、右側にアラートが表示されます  
 
    ![IoTHub](./images/E5T1-IoTHub-SecurityAlerts.png 'IoT Hub Security Alerts')
 
