@@ -2,7 +2,7 @@
 
 作業を開始する前に [事前準備](../Before%20HOL%20Jpn/Microsoft%20Defender%20for%20IoT%20BHOL.md "Microsoft Defender for IoT Before Hands-on-Lab") が完了しているか、今一度ご確認ください  
 
-> 最終更新日: 2022/03/15  
+> 最終更新日: 2022/04/12  
 > 対象 : Defender for IoT 10.5.x
 
 ## アーキテクチャ ダイアグラム ##
@@ -64,6 +64,8 @@
 
 以上で 100台 までデバイスを監視可能な Microsoft Defender for IoT の 30日間 無償試用版が開始します
 
+   > **NOTE:** Trial はサブスクリプションごとに1回のみとなります (無効化後に再度有効化を行っても期限は延長されません)
+
 ### 作業 2: IoT Hub を作成する
 この作業は PC から Azure ポータルにアクセスして行います  
 
@@ -101,17 +103,19 @@
 まず、オフラインセンサーのオンボーディング（有効化）を行います  
 
 1. [Azure ポータル](https://portal.azure.com/#home "Microsoft Azure Home") の検索ボックスに **Defender** を入力し、サービスの項目に表示された **Microsoft Defender for IoT** をクリックします  
-
+<!--
 1. **センサー** タブをクリックし、**アプライアンスの購入とソフトウェアのインストール**、**バージョンの選択** で **10.5.5（安定）以上 - 推奨** を選択し、**ダウンロード** をクリック、ISO ファイルを入手します  
    ![Onboard sensor](./images/E1T3-download-sensor-iso.png 'Download Sensor ISO')  
 
    > **NOTE:** お問い合わせ ポップアップウィンドウ は **送信せずに続行** で継続ください  
+//-->
+
 1. 左メニュー Management の **Site and sensors** をクリックし、**OTセンサーのオンボード** をクリックします  
    ![Onboard sensor](./images/E1T3-onboard-sensor.png 'Onboard Sensor')  
 
 1. センサー名 に **myofflinesensor** と入力、サブスクリプションに今回ハンズオンで用いるものを選択し、**クラウドに接続済み** を無効にした後 **登録** をクリックします  
    ![Register offline sensor](./images/E1T3-register-sensor.png 'Register Sensor')  
-1. センサーアクティベーション用のファイル保存が促されますので、保存して **Finish** をクリックします
+1. センサーアクティベーション用のファイル保存が促されますので、保存して **完了** をクリックします
    ![Activation Offline sensor](./images/E1T3-download-activation-file.png 'ActivationOffline Sensor')  
 1. **Site and sensors** に新しいセンサーがオンボードされたのを確認します  
    ![Sensor Onboarded](./images/E1T3-locally-managed-sensor.png 'Sensor Oonboarded')  
@@ -123,18 +127,21 @@
    - **サブスクリプション:** 今回ハンズオンで用いるものを選択  
    - **クラウドに接続済み:** 有効（標準のまま）  
    - **脅威インテリジェンスの自動更新:** 有効（標準のまま）  
-   - **センサーのバージョン:**  
-サイト セクションは、  
-   - **名前:**  
-   - **表示名:**  
-   - **ゾーン:**  
+   - **センサーのバージョン:**  バージョン 10X 以下 を選択
+サイト セクションは、
+   - **ハブ** 先ほど作成した IoT Hub を選択します
+   - **名前:** MD4IoTHub を入力 
+   - **表示名:**  (標準のまま)
+   - **ゾーン:**  (標準のまま)
 
    ![Reg Online Sensor](./images/E1T3-register-online-sensor.png 'Online Sensor')
 
 1. **登録** をクリックします  
-1. センサーアクティベーション用のファイル保存が促されますので、保存して **Finish** をクリックします
+1. センサーアクティベーション用のファイル保存が促されますので、保存して **完了** をクリックします
 
 1. 改めて **Site and sensors** で2つのセンサーがオンボードされたのを確認します  
+
+   ![Confirm Sensors](./images/E1T3-sensors.png 'Sensors')
 
 2つのファイル（センサー向けアクティベーション用ファイル）をダウンロードしました  
 Defender for IoT センサーをホストする 仮想PC(VM) への接続には RDP を利用しますので、アクティベーション用ファイルを利用する VM に対して copy (ctrl-c) and paste (ctrl-v) でコピーできます  
@@ -199,8 +206,6 @@ Defender for IoT センサーをホストする 仮想PC(VM) への接続には 
 ### 作業 2: オフライン用の Microsoft Denfender for IoT を構成する
 
 ここでは Microsoft Defender を 以前設定した IP アドレスに基づき設定します  
-
-During this task we will configure Azure Defender based on the IPs highlighted before, this first configuration will be based on an offline sensor.
 
 1. Hyper-V Manager で画面右下にある **Connect...** をクリック、表示された仮想マシンのウィンドウで **Start** をクリックします
 
